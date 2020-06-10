@@ -1,44 +1,44 @@
 variable "project_name" {
-  type = "string"
+  type = string
   description = "Name of the Google project."
   default = "Bitcoin Full Node"
 }
 
 variable "project_id" {
-  type = "string"
+  type = string
   description = "Id of the Google project for running bitcoin full node."
 }
 
 variable "region" {
-  type = "string"
+  type = string
   description = "Google project region."
   default = "europe-west1"
 }
 
 variable "zone" {
-  type = "string"
+  type = string
   description = "Google project zone."
   default = "europe-west1-d"
 }
 
 variable "kubernetes_node_pool_machine_type" {
-  type = "string"
+  type = string
   description = "Machine type for Kubernetes node pool."
-  default = "n1-standard-4"
+  default = "n1-standard-2"
 }
 
 variable "project_billing_account" {
-  type = "string"
+  type = string
   description = "Billing account for the project."
 }
 
 variable "bitcoin_version" {
-  type = "string"
+  type = string
   description = "Bitcoin core version. See https://hub.docker.com/r/nicolasdorier/docker-bitcoin for more details"
   default = "0.18.1"
 }
 
 variable "bitcoin_rpcauth" {
-  type = "string"
+  type = string
   description = "Basic authentication of the bitcoin rpc, corresponding to the rpcauth option of bitcoind. Run `rpcpython.py username password` to generate the string here."
 }

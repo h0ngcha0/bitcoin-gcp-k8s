@@ -3,6 +3,7 @@ locals {
 }
 
 resource "google_container_cluster" "cluster" {
+  provider = google-beta
   project = var.project_id
   name = "bitcoin-full-node"
   min_master_version = "latest"
@@ -11,7 +12,6 @@ resource "google_container_cluster" "cluster" {
 
   remove_default_node_pool = true
   initial_node_count = 1
-  enable_legacy_abac = true
 
   master_auth {
     # Disables basic auth
@@ -23,12 +23,18 @@ resource "google_container_cluster" "cluster" {
     }
   }
 
+  enable_legacy_abac = false
+
+  workload_identity_config {
+    identity_namespace = "${var.project_id}.svc.id.goog"
+  }
+
   depends_on = [
-    "google_project_service.project_service_compute",
-    "google_project_service.project_service_iam",
-    "google_project_service.project_service_logging",
-    "google_project_service.project_service_monitoring",
-    "google_project_service.project_service_stackdriver"
+    google_project_service.project_service_compute,
+    google_project_service.project_service_iam,
+    google_project_service.project_service_logging,
+    google_project_service.project_service_monitoring,
+    google_project_service.project_service_stackdriver
   ]
 }
 
@@ -46,7 +52,7 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
   }
 
   node_config {
-    preemptible = false
+    preemptible = true
     machine_type = var.kubernetes_node_pool_machine_type
 
     metadata = {
@@ -54,7 +60,7 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
     }
 
     labels = {
-      preemptible-node = "false"
+      preemptible-node = true
     }
 
     tags = [local.node_pool_ingress_tag]
@@ -71,6 +77,6 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
   }
 
   depends_on = [
-    "google_container_cluster.cluster"
+    google_container_cluster.cluster
   ]
 }

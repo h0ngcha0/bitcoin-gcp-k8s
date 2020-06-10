@@ -8,14 +8,14 @@ resource "kubernetes_namespace" "bitcoin" {
   }
 
   depends_on = [
-    "google_container_cluster.cluster"
+    google_container_cluster.cluster
   ]
 }
 
 resource "kubernetes_deployment" "bitcoind" {
   metadata {
     name = "bitcoind"
-    namespace = "${kubernetes_namespace.bitcoin.metadata.0.name}"
+    namespace = kubernetes_namespace.bitcoin.metadata.0.name
     labels = {
       app = "bitcoind"
     }
@@ -72,10 +72,28 @@ resource "kubernetes_deployment" "bitcoind" {
   }
 }
 
+resource "kubernetes_service" "bitcoind" {
+  metadata {
+    name = "bitcoind"
+    namespace = kubernetes_namespace.bitcoin.metadata.0.name
+  }
+
+  spec {
+    selector = {
+      app = "bitcoind"
+    }
+
+    port {
+      port = 8332
+      target_port = 8332
+    }
+  }
+}
+
 resource "kubernetes_persistent_volume_claim" "bitcoin-blockchain-pvc-claim" {
   metadata {
     name = "bitcoin-blockchain-pvc-claim"
-    namespace = "${kubernetes_namespace.bitcoin.metadata.0.name}"
+    namespace = kubernetes_namespace.bitcoin.metadata.0.name
   }
 
   spec {

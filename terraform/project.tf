@@ -11,7 +11,7 @@ resource "google_project_service" "project_service_compute" {
   service = "compute.googleapis.com"
   disable_dependent_services = true
   depends_on = [
-    "google_project.project"
+    google_project.project
   ]
 }
 
@@ -20,7 +20,7 @@ resource "google_project_service" "project_service_iam" {
   service = "iam.googleapis.com"
   disable_dependent_services = true
   depends_on = [
-    "google_project.project"
+    google_project.project
   ]
 }
 
@@ -29,7 +29,7 @@ resource "google_project_service" "project_service_logging" {
   service = "logging.googleapis.com"
   disable_dependent_services = true
   depends_on = [
-    "google_project.project"
+    google_project.project
   ]
 }
 
@@ -38,7 +38,7 @@ resource "google_project_service" "project_service_monitoring" {
   service = "monitoring.googleapis.com"
   disable_dependent_services = true
   depends_on = [
-    "google_project.project"
+    google_project.project
   ]
 }
 
@@ -47,6 +47,6 @@ resource "google_project_service" "project_service_stackdriver" {
   service = "stackdriver.googleapis.com"
   disable_dependent_services = true
   depends_on = [
-    "google_project.project"
+    google_project.project
   ]
 }
