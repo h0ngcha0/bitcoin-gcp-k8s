@@ -1,4 +1,4 @@
-# Bitcoin full node on GCP
+# Bitcoin Full Node on GCP Kubernetes Cluster
 
 There are [many reasons](https://blog.keys.casa/why-run-a-node/) to
 run a Bitcoin full node. Running it in the cloud has a few extra
@@ -59,7 +59,7 @@ terraform plan -var 'project_id=YOUR_PROJECT_ID' \
 terraform apply "plan.out"
 ```
 
-By default, machine type `n1-standard-2` is used, you can change it to
+By default, machine type `n1-standard-1` is used, you can change it to
 something else using `kubernetes_node_pool_machine_type`
 variable. Similiarly, `project_name`, `region`, `zone` and
 `bitcoin_version` can be configured as well through terraform
@@ -93,6 +93,8 @@ $ bitcoin-cli getrawtransaction e13d407be6085f1d0a0513f47577340f41f45d0b7250f3c5
 
   ....
 ```
+
+## Cost
 
 ## Issues
 

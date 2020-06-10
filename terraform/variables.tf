@@ -24,7 +24,7 @@ variable "zone" {
 variable "kubernetes_node_pool_machine_type" {
   type = string
   description = "Machine type for Kubernetes node pool."
-  default = "n1-standard-2"
+  default = "n1-standard-1"
 }
 
 variable "project_billing_account" {
