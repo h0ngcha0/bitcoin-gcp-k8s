@@ -48,7 +48,7 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
 
   autoscaling {
     min_node_count = 1
-    max_node_count = 2
+    max_node_count = 3
   }
 
   node_config {
@@ -62,6 +62,8 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
     labels = {
       preemptible-node = true
     }
+
+    disk_size_gb = 25
 
     tags = [local.node_pool_ingress_tag]
 

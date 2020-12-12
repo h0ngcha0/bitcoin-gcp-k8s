@@ -23,7 +23,7 @@ as a starting point to build and deploy Bitcoin powered applications.
 
 ## Prerequisit
 
-* [Terraform](https://www.terraform.io/) (>0.12)
+* [Terraform](https://www.terraform.io/) (>0.13)
 * [Google Cloud SDK](https://cloud.google.com/sdk/)
 
 ## Setup
