@@ -101,7 +101,7 @@ resource "kubernetes_persistent_volume_claim" "bitcoin-blockchain-pvc-claim" {
 
     resources {
       requests = {
-        storage = "350Gi"
+        storage = "400Gi"
       }
     }
 
