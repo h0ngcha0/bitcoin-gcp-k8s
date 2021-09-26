@@ -59,7 +59,7 @@ terraform plan -var 'project_id=YOUR_PROJECT_ID' \
 terraform apply "plan.out"
 ```
 
-By default, machine type `n1-standard-1` is used, you can change it to
+By default, machine type `e2-standard-2` is used, you can change it to
 something else using `kubernetes_node_pool_machine_type`
 variable. Similiarly, `project_name`, `region`, `zone` and
 `bitcoin_version` can be configured as well through terraform

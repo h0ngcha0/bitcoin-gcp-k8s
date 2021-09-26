@@ -2,6 +2,10 @@ locals {
   node_pool_ingress_tag = "cluster-ingress"
 }
 
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+}
+
 resource "google_container_cluster" "cluster" {
   provider = google-beta
   project = var.project_id
@@ -48,7 +52,7 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
 
   autoscaling {
     min_node_count = 1
-    max_node_count = 3
+    max_node_count = 2
   }
 
   node_config {
@@ -81,4 +85,12 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
   depends_on = [
     google_container_cluster.cluster
   ]
+}
+
+resource "google_compute_address" "miner_ingress" {
+  name    = "miner-ingress"
+  project = var.project_id
+  address_type = "EXTERNAL"
+
+  region = var.region
 }
