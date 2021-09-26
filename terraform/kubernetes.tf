@@ -3,19 +3,19 @@ locals {
 }
 
 provider "kubernetes" {
-  config_path    = "~/.kube/config"
+  config_path = "~/.kube/config"
 }
 
 resource "google_container_cluster" "cluster" {
-  provider = google-beta
-  project = var.project_id
-  name = "bitcoin-full-node"
+  provider           = google-beta
+  project            = var.project_id
+  name               = "bitcoin-full-node"
   min_master_version = "latest"
 
   location = var.zone
 
   remove_default_node_pool = true
-  initial_node_count = 1
+  initial_node_count       = 1
 
   master_auth {
     # Disables basic auth
@@ -43,9 +43,9 @@ resource "google_container_cluster" "cluster" {
 }
 
 resource "google_container_node_pool" "bitcoin_nodes_01" {
-  project = var.project_id
-  name = "bitcoin-node-pool-01"
-  cluster = google_container_cluster.cluster.name
+  project  = var.project_id
+  name     = "bitcoin-node-pool-01"
+  cluster  = google_container_cluster.cluster.name
   location = var.zone
 
   initial_node_count = 1
@@ -56,7 +56,7 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
   }
 
   node_config {
-    preemptible = true
+    preemptible  = true
     machine_type = var.kubernetes_node_pool_machine_type
 
     metadata = {
@@ -88,8 +88,8 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
 }
 
 resource "google_compute_address" "miner_ingress" {
-  name    = "miner-ingress"
-  project = var.project_id
+  name         = "miner-ingress"
+  project      = var.project_id
   address_type = "EXTERNAL"
 
   region = var.region
