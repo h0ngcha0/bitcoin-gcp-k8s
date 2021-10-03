@@ -50,3 +50,8 @@ resource "google_project_service" "project_service_stackdriver" {
     google_project.project
   ]
 }
+
+resource "google_compute_project_default_network_tier" "default" {
+  project      = var.project_id
+  network_tier = "STANDARD"
+}

@@ -87,10 +87,3 @@ resource "google_container_node_pool" "bitcoin_nodes_01" {
   ]
 }
 
-resource "google_compute_address" "miner_ingress" {
-  name         = "miner-ingress"
-  project      = var.project_id
-  address_type = "EXTERNAL"
-
-  region = var.region
-}
